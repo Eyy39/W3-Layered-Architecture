@@ -26,6 +26,8 @@ void main() {
     expect(lms.courses.first.name, 'Mobile');
   });
 
+
+  // Task 1 — Add and remove courses
   test('create and removes a course', () {
     final lms = LmsSystem();
 
@@ -60,7 +62,8 @@ void main() {
     );
   });
 
-  test('enrolls an existing student in an existing course', () {
+// Task 2 — Enroll a student in a course
+  test('records enrollment student', () {
     final lms = LmsSystem();
     lms.addStudent(studentId: 'S1', studentName: 'Ronan');
     lms.addCourse(courseId: 'C1', courseName: 'Mobile Development', capacity: 1);
@@ -68,6 +71,7 @@ void main() {
     lms.enrollStudent(studentId: 'S1', courseId: 'C1');
 
     expect(lms.courses.single.studentIds, contains('S1'));
+    expect(lms.courses.single.studentIds, hasLength(1));
   });
 
   test('rejects enrollment when the student does not exist', () {
@@ -102,6 +106,7 @@ void main() {
     );
   });
 
+// Task 3 — Remove a student from a course
   test('removes an existing enrollment', () {
     final lms = LmsSystem();
     lms.addStudent(studentId: 'S1', studentName: 'Ronan');
@@ -162,6 +167,7 @@ void main() {
     expect(lms.courses.every((course) => course.studentIds.isEmpty), isTrue);
   });
 
+// Task 4 — Add a result to a course
   test('adds a valid result', () {
     final lms = LmsSystem();
     lms.addStudent(studentId: 'S1', studentName: 'Ronan');
@@ -226,7 +232,7 @@ void main() {
     );
   });
 
-  test('allows results for different assessments under the chosen policy', () {
+  test('chosen dublicate policy', () {
     final lms = LmsSystem();
     lms.addStudent(studentId: 'S1', studentName: 'Ronan');
     lms.addCourse(courseId: 'C1', courseName: 'Mobile Development', capacity: 1);
@@ -238,6 +244,7 @@ void main() {
     expect(lms.courses.single.results, hasLength(2));
   });
 
+// Task 5 — Remove a student result
   test('removes an existing result', () {
     final lms = LmsSystem();
     lms.addStudent(studentId: 'S1', studentName: 'Ronan');
